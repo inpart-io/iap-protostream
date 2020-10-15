@@ -321,7 +321,8 @@ final class MarshallerCodeGenerator {
             case SINT64:
                iw.append("{\n");
                iw.inc();
-               iw.append(fieldMetadata.getJavaTypeName()).append(" v = ").append(box(convert("$2." + makeStreamIOMethodName(fieldMetadata, false) + "()", fieldMetadata), fieldMetadata.getJavaType())).append(";\n");
+               String typeName = fieldMetadata.getJavaType() == byte[].class ? "byte[]" : fieldMetadata.getJavaType().getName();
+               iw.append(typeName).append(" v = ").append(box(convert("$2." + makeStreamIOMethodName(fieldMetadata, false) + "()", fieldMetadata), fieldMetadata.getJavaType())).append(";\n");
                genSetField(iw, fieldMetadata);
                iw.dec();
                iw.append("}\n");
@@ -528,7 +529,8 @@ final class MarshallerCodeGenerator {
                iw.append("java.util.Collection");
             }
          } else {
-            iw.append(fieldMetadata.getJavaTypeName());
+            String typeName = fieldMetadata.getJavaType() == byte[].class ? "byte[]" : fieldMetadata.getJavaType().getName();
+            iw.append(typeName);
          }
          iw.append(' ').append(v).append(" = o.").append(createGetter(fieldMetadata)).append(";\n");
          if (fieldMetadata.isRequired()) {

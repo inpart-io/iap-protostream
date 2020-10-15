@@ -506,7 +506,7 @@ public class ProtoSchemaBuilderTest extends AbstractProtoStreamTest {
       @ProtoField(number = 34, defaultValue = "1")
       Instant[] testField34 = {Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)};
 
-      @ProtoField(number = 35, defaultValue = "35")
+      @ProtoField(number = 35)
       byte[] testField35 = {1, 2, 3};
 
       @ProtoField(number = 36, defaultValue = "36")
@@ -888,7 +888,7 @@ public class ProtoSchemaBuilderTest extends AbstractProtoStreamTest {
 
       private byte[] testField85 = {1, 2, 3};
 
-      @ProtoField(number = 85, defaultValue = "85")
+      @ProtoField(number = 85)
       public byte[] getTestField85() {
          return testField85;
       }

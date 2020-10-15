@@ -478,6 +478,8 @@ final class ProtoMessageTypeMetadata extends ProtoTypeMetadata {
                   throw new ProtoSchemaBuilderException(javaType.getCanonicalName() + " is not a Protobuf marshallable enum type");
                }
                return Type.ENUM;
+            } else if (javaType == byte[].class) {
+                return Type.BYTES;
             } else if (javaType == String.class) {
                return Type.STRING;
             } else if (javaType == Double.class || javaType == Double.TYPE) {
@@ -557,7 +559,7 @@ final class ProtoMessageTypeMetadata extends ProtoTypeMetadata {
    }
 
    private boolean isRepeated(Class<?> type) {
-      return type.isArray() || Collection.class.isAssignableFrom(type);
+      return type != byte[].class && (type.isArray() || Collection.class.isAssignableFrom(type));
    }
 
    private Method findGetter(String propertyName, Class<?> propertyType) {
